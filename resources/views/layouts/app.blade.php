@@ -8,10 +8,6 @@
     <title>@yield('title')</title>
 
     <!-- General CSS Files -->
-    <link rel="shortcut icon"
-        href="{{ preg_match('/profile/i', klien('image_icon')) ? Storage::url(klien('image_icon')) : asset(klien('image_icon')) }}"
-        type="image/x-icon" />
-
     <link rel="stylesheet" href="{{ asset('library/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
