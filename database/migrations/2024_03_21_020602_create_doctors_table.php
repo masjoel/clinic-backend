@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('doctor_name');
             $table->string('doctor_specialist');
             $table->string('doctor_phone');
-            $table->string('doctor_email');
+            $table->string('doctor_email')->unique();
             $table->string('photo')->nullable();
             $table->string('address')->nullable();
             $table->string('sip')->nullable();

@@ -9,7 +9,7 @@
 @section('main')
     <div class="card card-primary">
         <div class="card-header">
-            <h4><a href="{{ route('home') }}" class="float-left badge badge-primary p-1 mr-2"><i class="fas fa-arrow-left"></i></a>Login</h4>
+            <h4>Login</h4>
         </div>
 
         <div class="card-body">

@@ -17,6 +17,9 @@
                     <a href="{{ route('profil-bisnis.edit', auth()->user()->perusahaan_id) }}" class="nav-link "><i
                             class="fas fa-home"></i><span>Profil Klinik</span></a>
                 </li> --}}
+                <li class="nav-item {{ Request::is('doctors*') ? 'active' : '' }}">
+                    <a href="{{ route('doctors.index') }}" class="nav-link "><i class="fas fa-doctors"></i><span>Doctor List</span></a>
+                </li>
                 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nav-link "><i class="fas fa-users"></i><span>User List</span></a>
                 </li>
