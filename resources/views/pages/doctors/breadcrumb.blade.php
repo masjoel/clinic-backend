@@ -1,6 +1,6 @@
 <div class="section-header-breadcrumb">
     <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
-    <div class="breadcrumb-item"><a href="{{ route('doctors.index') }}">doctors</a></div>
+    <div class="breadcrumb-item"><a href="{{ route('doctors.index') }}">Doctors</a></div>
     @if (Request::is('*create'))
         <div class="breadcrumb-item">New User</div>
     @elseif (Request::is('*edit'))
