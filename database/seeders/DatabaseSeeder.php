@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DoctorSchedule;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\ProfileClinic;
@@ -26,7 +27,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            DoctorSeeder::class
+            DoctorSeeder::class,
+            PatientSeeder::class,
+            DoctorScheduleSeeder::class,
         ]);
     }
 }
