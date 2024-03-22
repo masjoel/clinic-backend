@@ -28,6 +28,10 @@ class UpdateDoctorReq extends FormRequest
             'doctor_phone' => 'required',
             'doctor_email' => 'required|email|unique:doctors,doctor_email,' . $doctorId->id,
             'sip' => 'required',
+            'id_ihs' => 'required',
+            'nik' => 'required',
+            'address' => 'nullable',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ];
     }
 }

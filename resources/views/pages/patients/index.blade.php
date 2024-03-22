@@ -13,7 +13,7 @@
             <div class="section-header">
                 <h1>All {{ $title }}</h1>
 
-                @include('pages.doctors.breadcrumb')
+                @include('pages.patients.breadcrumb')
             </div>
             <div class="section-body">
 
@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="section-header-button">
-                                    <a href="{{ route('doctors.create') }}" class="btn btn-primary"><i
+                                    <a href="{{ route('patients.create') }}" class="btn btn-primary"><i
                                             class="fas fa-plus"></i>
                                         New {{ $title }}</a>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="card-body">
 
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('doctors.index') }}">
+                                    <form method="GET" action="{{ route('patients.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">
@@ -51,37 +51,29 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table" id="main-table">
                                         <tr>
+                                            <th>NIK</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Specialist</th>
-                                            <th>Photo</th>
+                                            <th>Birth Date</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($doctors as $doctor)
+                                        @foreach ($patients as $patient)
                                             <tr>
-                                                <td>{{ $doctor->doctor_name }}</td>
-                                                <td>{{ $doctor->doctor_email }}</td>
-                                                <td>{{ $doctor->doctor_phone }}</td>
-                                                <td>{{ $doctor->doctor_specialist }}</td>
-                                                <td>
-                                                    @if ($doctor->photo)
-                                                        <img src="{{ Str::contains($doctor->photo, 'https') ? asset('' . $doctor->photo) : Storage::url($doctor->photo) }}"
-                                                            alt="" width="50"
-                                                            class="rounded-circle profile-widget-picture">
-                                                    @else
-                                                        <span class="badge badge-danger">No Image</span>
-                                                    @endif
-                                                </td>
+                                                <td>{{ $patient->nik }}</td>
+                                                <td>{{ $patient->name }}</td>
+                                                <td>{{ $patient->email }}</td>
+                                                <td>{{ $patient->phone }}</td>
+                                                <td>{{ $patient->birth_date }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('doctors.edit', $doctor->id) }}'
+                                                        <a href='{{ route('patients.edit', $patient->id) }}'
                                                             class="btn btn-sm btn-info btn-icon"> <i
                                                                 class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
                                                         <button class="ml-2 btn btn-sm btn-danger btn-icon confirm-delete"
-                                                            id="delete" data-id="{{ $doctor->id }}" title="Hapus"
+                                                            id="delete" data-id="{{ $patient->id }}" title="Hapus"
                                                             data-toggle="tooltip">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
@@ -92,7 +84,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $doctors->withQueryString()->links() }}
+                                    {{ $patients->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
@@ -114,8 +106,8 @@
         $(document).on("click", "button#delete", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup(BASE_URL + '/doctors/' + id, '{{ csrf_token() }}', '', '',
-                BASE_URL + '/doctors');
+            showDeletePopup(BASE_URL + '/patients/' + id, '{{ csrf_token() }}', '', '',
+                BASE_URL + '/patients');
         });
     </script>
 @endpush

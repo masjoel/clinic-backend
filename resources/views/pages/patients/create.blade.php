@@ -14,13 +14,14 @@
         <section class="section">
             <div class="section-header">
                 <h1>{{ $title }}</h1>
-                @include('pages.doctors.breadcrumb')
+                @include('pages.patients.breadcrumb')
             </div>
+
             <div class="section-body">
+
                 <div class="card">
-                    <form action="{{ route('doctors.update', $doctor) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('patients.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="card-header">
                             <h4>{{ $title }}</h4>
                         </div>
@@ -31,7 +32,7 @@
                                         <label>Name</label>
                                         <input type="text"
                                             class="form-control @error('doctor_name') is-invalid @enderror"
-                                            name="doctor_name" value="{{ old('doctor_name', $doctor->doctor_name) }}">
+                                            name="doctor_name" value="{{ old('doctor_name') }}">
                                         @error('doctor_name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -41,7 +42,7 @@
                                     <div class="form-group">
                                         <label>NIK</label>
                                         <input type="text" class="form-control @error('nik') is-invalid @enderror"
-                                            name="nik" value="{{ old('nik', $doctor->nik) }}">
+                                            name="nik" value="{{ old('nik') }}">
                                         @error('nik')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -52,7 +53,7 @@
                                         <label>Specialist</label>
                                         <input type="text"
                                             class="form-control @error('doctor_specialist') is-invalid @enderror"
-                                            name="doctor_specialist" value="{{ old('doctor_specialist', $doctor->doctor_specialist) }}">
+                                            name="doctor_specialist" value="{{ old('doctor_specialist') }}">
                                         @error('doctor_specialist')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -65,7 +66,7 @@
                                                 <label>Phone</label>
                                                 <input type="text"
                                                     class="form-control @error('doctor_phone') is-invalid @enderror"
-                                                    name="doctor_phone" value="{{ old('doctor_phone', $doctor->doctor_phone) }}"
+                                                    name="doctor_phone" value="{{ old('doctor_phone') }}"
                                                     autocomplete="off">
                                                 @error('doctor_phone')
                                                     <div class="invalid-feedback">
@@ -79,7 +80,7 @@
                                                 <label>Email</label>
                                                 <input type="email"
                                                     class="form-control @error('doctor_email') is-invalid @enderror"
-                                                    name="doctor_email" value="{{ old('doctor_email', $doctor->doctor_email) }}"
+                                                    name="doctor_email" value="{{ old('doctor_email') }}"
                                                     autocomplete="off">
                                                 @error('doctor_email')
                                                     <div class="invalid-feedback">
@@ -92,7 +93,7 @@
                                             <div class="form-group">
                                                 <label>SIP</label>
                                                 <input type="text"class="form-control @error('sip') is-invalid @enderror"
-                                                    name="sip" value="{{ old('sip', $doctor->sip) }}">
+                                                    name="sip" value="{{ old('sip') }}">
                                                 @error('sip')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -105,7 +106,7 @@
                                                 <label>ID IHS</label>
                                                 <input type="text"
                                                     class="form-control @error('id_ihs') is-invalid @enderror"
-                                                    name="id_ihs" value="{{ old('id_ihs', $doctor->id_ihs) }}">
+                                                    name="id_ihs" value="{{ old('id_ihs') }}">
                                                 @error('id_ihs')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -117,13 +118,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <textarea data-height="70" class="form-control @error('address') is-invalid @enderror" name="address">{{ old('address', $doctor->address) }}</textarea>
+                                        <textarea data-height="70" class="form-control @error('address') is-invalid @enderror" name="address">{{ old('address') }}</textarea>
                                         @error('address')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
+
+
+
+
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-4">
@@ -132,7 +137,7 @@
                                             class="image-preview @if (session('error')) is-invalid @endif">
                                             <label id="image-label">Choose File</label>
                                             <input type="file" name="photo" id="image-upload" />
-                                            <img src="{{ Storage::url($doctor->photo) }}" class="img-fluid image-tampil" alt="">
+                                            <img src="" class="img-fluid image-tampil" alt="">
                                         </div>
                                         @if (session('error'))
                                             <div class="invalid-feedback">
@@ -145,7 +150,6 @@
 
                         </div>
                         <div class="card-footer text-right">
-                            <input type="hidden" name="id" value="{{ $doctor->id }}">
                             <button class="btn btn-lg btn-primary"><i class="fas fa-save"></i> SIMPAN</button>
                         </div>
                     </form>
@@ -155,6 +159,7 @@
         </section>
     </div>
 @endsection
+
 @push('scripts')
     <!-- JS Libraies -->
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>

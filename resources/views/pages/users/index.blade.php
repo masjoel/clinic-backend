@@ -36,7 +36,7 @@
                             <div class="card-body">
 
                                 <div class="float-right">
-                                    <form method="GET" , action="{{ route('users.index') }}">
+                                    <form method="GET" action="{{ route('users.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">

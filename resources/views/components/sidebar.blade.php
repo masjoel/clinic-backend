@@ -18,10 +18,16 @@
                             class="fas fa-home"></i><span>Profil Klinik</span></a>
                 </li> --}}
                 <li class="nav-item {{ Request::is('doctors*') ? 'active' : '' }}">
-                    <a href="{{ route('doctors.index') }}" class="nav-link "><i class="fas fa-doctors"></i><span>Doctor List</span></a>
+                    <a href="{{ route('doctors.index') }}" class="nav-link "><i class="fas fa-user-doctor"></i><span>Doctors</span></a>
+                </li>
+                <li class="nav-item {{ Request::is('doctor-schedules*') ? 'active' : '' }}">
+                    <a href="{{ route('doctor-schedules.index') }}" class="nav-link "><i class="fas fa-calendar-alt"></i><span>Doctor Schedule</span></a>
+                </li>
+                <li class="nav-item {{ Request::is('patients*') ? 'active' : '' }}">
+                    <a href="{{ route('patients.index') }}" class="nav-link "><i class="fas fa-user-doctor"></i><span>Patients</span></a>
                 </li>
                 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-                    <a href="{{ route('users.index') }}" class="nav-link "><i class="fas fa-users"></i><span>User List</span></a>
+                    <a href="{{ route('users.index') }}" class="nav-link "><i class="fas fa-users"></i><span>Users</span></a>
                 </li>
             <li class="nav-item">
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

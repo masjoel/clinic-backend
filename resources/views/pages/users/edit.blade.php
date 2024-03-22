@@ -113,16 +113,3 @@
         </section>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#username').on('input', function() {
-                var inputValue = $(this).val();
-                inputValue = inputValue.toLowerCase();
-                inputValue = inputValue.replace(/[^a-z0-9]/g, '.');
-                $(this).val(inputValue);
-            });
-        });
-    </script>
-@endpush

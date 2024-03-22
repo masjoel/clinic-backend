@@ -14,11 +14,11 @@
         <section class="section">
             <div class="section-header">
                 <h1>{{ $title }}</h1>
-                @include('pages.doctors.breadcrumb')
+                @include('pages.patients.breadcrumb')
             </div>
             <div class="section-body">
                 <div class="card">
-                    <form action="{{ route('doctors.update', $doctor) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('patients.update', $doctor) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-header">
@@ -52,7 +52,8 @@
                                         <label>Specialist</label>
                                         <input type="text"
                                             class="form-control @error('doctor_specialist') is-invalid @enderror"
-                                            name="doctor_specialist" value="{{ old('doctor_specialist', $doctor->doctor_specialist) }}">
+                                            name="doctor_specialist"
+                                            value="{{ old('doctor_specialist', $doctor->doctor_specialist) }}">
                                         @error('doctor_specialist')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -65,7 +66,8 @@
                                                 <label>Phone</label>
                                                 <input type="text"
                                                     class="form-control @error('doctor_phone') is-invalid @enderror"
-                                                    name="doctor_phone" value="{{ old('doctor_phone', $doctor->doctor_phone) }}"
+                                                    name="doctor_phone"
+                                                    value="{{ old('doctor_phone', $doctor->doctor_phone) }}"
                                                     autocomplete="off">
                                                 @error('doctor_phone')
                                                     <div class="invalid-feedback">
@@ -79,7 +81,8 @@
                                                 <label>Email</label>
                                                 <input type="email"
                                                     class="form-control @error('doctor_email') is-invalid @enderror"
-                                                    name="doctor_email" value="{{ old('doctor_email', $doctor->doctor_email) }}"
+                                                    name="doctor_email"
+                                                    value="{{ old('doctor_email', $doctor->doctor_email) }}"
                                                     autocomplete="off">
                                                 @error('doctor_email')
                                                     <div class="invalid-feedback">
@@ -132,7 +135,8 @@
                                             class="image-preview @if (session('error')) is-invalid @endif">
                                             <label id="image-label">Choose File</label>
                                             <input type="file" name="photo" id="image-upload" />
-                                            <img src="{{ Storage::url($doctor->photo) }}" class="img-fluid image-tampil" alt="">
+                                            <img src="{{ Storage::url($doctor->photo) }}" class="img-fluid image-tampil"
+                                                alt="">
                                         </div>
                                         @if (session('error'))
                                             <div class="invalid-feedback">
