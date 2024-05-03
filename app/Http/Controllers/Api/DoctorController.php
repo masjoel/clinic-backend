@@ -21,10 +21,10 @@ class DoctorController extends Controller
             'status' => 'OK'
         ], 200);
     }
-    public function show(Doctor $api_doctor)
+    public function show(Doctor $doctor)
     {
         return response([
-            'data' => $api_doctor,
+            'data' => $doctor,
             'message' => 'Success',
             'status' => 'OK'
         ], 200);
