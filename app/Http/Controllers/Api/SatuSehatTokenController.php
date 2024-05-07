@@ -8,12 +8,9 @@ class SatuSehatTokenController extends Controller
 {
     public function token()
     {
-        $satusehat_url = 'https://api-satusehat-stg.dto.kemkes.go.id';
-        $client_id = 'snf1cD7wnmwF7sYGLdfdgFKm3wC5HAvgqZiRAhv6Lx1uAsut';
-        $client_secret = 'yXJt89ONtePl5a6oSsjhWRPajPwxkPHxexwdeC1rlf8wsA4YGerZzd1OjdzMFNYn';
-        // $satusehat_url = env('SATUSEHAT_BASE_URL_STG');
-        // $client_id = env('CLIENTID_STG');
-        // $client_secret = env('CLIENTSECRET_STG');
+        $satusehat_url = env('SATUSEHAT_BASE_URL_STG');
+        $client_id = env('CLIENTID_STG');
+        $client_secret = env('CLIENTSECRET_STG');
         
         $curl = curl_init();
         curl_setopt_array($curl, array(
