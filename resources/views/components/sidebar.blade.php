@@ -26,6 +26,9 @@
                 <li class="nav-item {{ Request::is('patients*') ? 'active' : '' }}">
                     <a href="{{ route('patients.index') }}" class="nav-link "><i class="fas fa-user-doctor"></i><span>Patients</span></a>
                 </li>
+                <li class="nav-item {{ Request::is('service-medicines*') ? 'active' : '' }}">
+                    <a href="{{ route('service-medicines.index') }}" class="nav-link "><i class="fa-solid fa-stethoscope"></i><span>Service and Medicines</span></a>
+                </li>
                 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nav-link "><i class="fas fa-users"></i><span>Users</span></a>
                 </li>

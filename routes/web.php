@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorScheduleController;
+use App\Http\Controllers\ServiceMedicineController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -19,4 +20,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('doctors', DoctorController::class);
     Route::resource('doctor-schedules', DoctorScheduleController::class);
     Route::resource('patients', PatientController::class);
+    Route::resource('service-medicines', ServiceMedicineController::class);
 });

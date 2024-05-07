@@ -87,6 +87,7 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorReq $request, Doctor $doctor)
     {
+        DB::beginTransaction();
         $imagePath = $doctor->photo;
         $imagePathOld = $doctor->photo;
         if ($request->hasFile('photo')) {
@@ -109,6 +110,7 @@ class DoctorController extends Controller
         $validate = $request->validated();
         $validate['photo'] = $imagePath;
         $doctor->update($validate);
+        DB::commit();
         return redirect()->route('doctors.index')->with('success', 'Edit Doctor Successfully');
     }
 
