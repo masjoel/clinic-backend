@@ -14,7 +14,8 @@ class PatientScheduleController extends Controller
             ->when($request->input('nik'), function ($query, $nik) {
                 return $query->whereHas('patient', function ($query) use ($nik) {
                     $query->where('nik', 'like', '%' . $nik . '%')
-                        ->orWhere('name', 'like', '%' . $nik . '%');
+                        ->orWhere('name', 'like', '%' . $nik . '%')
+                        ->orWhere('complaint', 'like', '%' . $nik . '%');
                 });
             })
             ->orderBy('id', 'desc')
