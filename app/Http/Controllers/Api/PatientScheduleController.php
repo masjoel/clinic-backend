@@ -13,12 +13,8 @@ class PatientScheduleController extends Controller
         $patientSchedules = PatientSchedule::with('patient')
             ->when($request->input('nik'), function ($query, $nik) {
                 return $query->whereHas('patient', function ($query) use ($nik) {
-                    $query->where('nik', 'like', '%' . $nik . '%');
-                });
-            })
-            ->when($request->input('name'), function ($query, $nik) {
-                return $query->whereHas('patient', function ($query) use ($nik) {
-                    $query->where('name', 'like', '%' . $nik . '%');
+                    $query->where('nik', 'like', '%' . $nik . '%')
+                        ->orWhere('name', 'like', '%' . $nik . '%');
                 });
             })
             ->orderBy('id', 'desc')
