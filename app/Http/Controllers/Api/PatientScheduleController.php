@@ -10,8 +10,11 @@ class PatientScheduleController extends Controller
 {
     public function index(Request $request)
     {
-        $patientSchedules = PatientSchedule::when($request->input('patient_id'), function ($query, $name) {
-                return $query->where('patient_id', 'like', '%' . $name . '%');
+        $patientSchedules = PatientSchedule::with('patient')
+            ->when($request->input('nik'), function ($query, $nik) {
+                return $query->whereHas('patient', function ($query) use ($nik) {
+                    $query->where('nik', 'like', '%' . $nik . '%');
+                });
             })
             ->orderBy('id', 'desc')
             ->get();
@@ -30,7 +33,7 @@ class PatientScheduleController extends Controller
             'doctor_id' => 'required',
             'schedule_time' => 'required',
             'complaint' => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
         ]);
 
         $patientSchedule = PatientSchedule::create([
@@ -47,6 +50,6 @@ class PatientScheduleController extends Controller
             'data' => $patientSchedule,
             'message' => 'Patient schedule stored',
             'status' => 'OK'
-        ], 200);
+        ], 201);
     }
 }
