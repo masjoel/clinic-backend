@@ -10,7 +10,7 @@ class PaymentDetailController extends Controller
 {
     public function index(Request $request)
     {
-        $paymentDetails = PaymentDetail::with(['patientSchedule', 'patient'])
+        $paymentDetails = PaymentDetail::with(['patientSchedule', 'patient', 'patientSchedule.medicalRecord'])
             ->when($request->input('name'), function ($query, $name) {
                 return $query->whereHas('patient', function ($query) use ($name) {
                     $query->where('name', 'like', '%' . $name . '%');

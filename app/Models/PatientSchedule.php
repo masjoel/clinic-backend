@@ -18,4 +18,8 @@ class PatientSchedule extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+    public function medicalRecord()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
 }
