@@ -11,7 +11,7 @@ class MedicalRecordController extends Controller
 {
     public function index(Request $request)
     {
-        $medicalRecords = MedicalRecord::with('doctor', 'patient', 'medicalRecordServices')
+        $medicalRecords = MedicalRecord::with('doctor', 'patient', 'medicalRecordServices', 'patientSchedule')
             ->when($request->input('name'), function ($query, $name) {
                 return $query->whereHas('patient', function ($query) use ($name) {
                     $query->where('name', 'like', '%' . $name . '%');
