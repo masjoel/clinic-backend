@@ -17,6 +17,9 @@ class MedicalRecordController extends Controller
                     $query->where('name', 'like', '%' . $name . '%');
                 });
             })
+            ->when($request->input('id_mr'), function ($query, $idMr) {
+                    $query->where('id', $idMr);
+            })
             ->orderBy('id', 'desc')
             ->get();
 
