@@ -11,7 +11,7 @@ class MedicalRecordController extends Controller
 {
     public function index(Request $request)
     {
-        $medicalRecords = MedicalRecord::with('doctor', 'patient', 'medicalRecordServices', 'patientSchedule')
+        $medicalRecords = MedicalRecord::with('doctor', 'patient', 'medicalRecordServices.serviceMedicine', 'patientSchedule')
             ->when($request->input('name'), function ($query, $name) {
                 return $query->whereHas('patient', function ($query) use ($name) {
                     $query->where('name', 'like', '%' . $name . '%');
@@ -58,7 +58,7 @@ class MedicalRecordController extends Controller
                 'service_medicine_id' => $service['id'],
                 'quantity' => $service['quantity'],
             ]);
-            $totalPrice += ServiceMedicine::find($service['id'])->price;
+            $totalPrice += (ServiceMedicine::find($service['id'])->price * $service['quantity']);
         }
 
         $patientSchedule = $medicalRecord->patientSchedule;

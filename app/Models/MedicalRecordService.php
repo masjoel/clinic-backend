@@ -12,11 +12,11 @@ class MedicalRecordService extends Model
 
     public function medicalRecord()
     {
-        return $this->belongsTo(MedicalRecords::class);
+        return $this->belongsTo(MedicalRecord::class);
     }
 
     public function serviceMedicine()
     {
-        return $this->belongsTo(ServiceMedicines::class);
+        return $this->belongsTo(ServiceMedicine::class);
     }
 }
