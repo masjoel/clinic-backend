@@ -18,7 +18,7 @@ class MedicalRecordController extends Controller
                 });
             })
             ->when($request->input('id_mr'), function ($query, $idMr) {
-                    $query->where('id', $idMr);
+                $query->where('id', $idMr);
             })
             ->orderBy('id', 'desc')
             ->get();
@@ -27,7 +27,28 @@ class MedicalRecordController extends Controller
             'data' => $medicalRecords,
             'message' => 'Success',
             'status' => 'OK'
-        ], 200);    }
+        ], 200);
+    }
+    public function getMRCompleted(Request $request)
+    {
+        $medicalRecords = MedicalRecord::with('doctor', 'patient', 'medicalRecordServices.serviceMedicine', 'patientSchedule')
+            ->whereHas('patientSchedule', function ($query) {
+                $query->where('status', 'completed');
+            })
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->whereHas('patient', function ($query) use ($name) {
+                    $query->where('name', 'like', '%' . $name . '%');
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response([
+            'data' => $medicalRecords,
+            'message' => 'Success',
+            'status' => 'OK'
+        ], 200);
+    }
 
     public function store(Request $request)
     {

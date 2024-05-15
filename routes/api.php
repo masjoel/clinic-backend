@@ -25,4 +25,5 @@ Route::apiResource('patient-schedule', PatientScheduleController::class)->middle
 Route::get('satusehat-token', [SatuSehatTokenController::class, 'token'])->middleware('auth:sanctum');
 Route::apiResource('medical-record', MedicalRecordController::class)->middleware('auth:sanctum');
 Route::get('medical-record/services/{id}', [MedicalRecordController::class, 'getServicesByScheduleId'])->middleware('auth:sanctum');
+Route::get('medical-record-completed', [MedicalRecordController::class, 'getMRCompleted'])->middleware('auth:sanctum');
 Route::apiResource('payment-detail', PaymentDetailController::class)->middleware('auth:sanctum');

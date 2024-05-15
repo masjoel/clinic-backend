@@ -54,4 +54,16 @@ class PatientScheduleController extends Controller
             'status' => 'OK'
         ], 201);
     }
+    public function update(Request $request, PatientSchedule $patient_schedule)
+    {
+        $data = $request->all();
+        $data['status'] = $request->status;
+        $patientSchedule = $patient_schedule->update($data);
+
+        return response([
+            'data' => $patientSchedule,
+            'message' => 'Patient schedule '.$request->status,
+            'status' => 'OK'
+        ], 201);
+    }
 }
