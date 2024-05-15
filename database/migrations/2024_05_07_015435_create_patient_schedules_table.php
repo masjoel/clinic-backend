@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
             $table->dateTime('schedule_time');
             $table->text('complaint');
-            $table->enum('status', ['waiting', 'processing', 'processed', 'canceled', 'completed']);
+            $table->enum('status', ['waiting', 'processing', 'processed', 'canceled', 'rejected', 'completed']);
             $table->integer('no_antrian')->nullable();
             $table->enum('payment_method', ['cash', 'qris'])->nullable();
             $table->integer('total_price')->nullable();
