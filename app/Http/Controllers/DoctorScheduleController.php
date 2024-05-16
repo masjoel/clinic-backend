@@ -18,7 +18,7 @@ class DoctorScheduleController extends Controller
         $title = 'Schedule';
         $doctorSchedules = DoctorSchedule::join('doctors', 'doctor_schedules.doctor_id', '=', 'doctors.id')
             ->when($request->input('search'), function ($query, $search) {
-                return $query->where('doctors.doctor_name', 'like', '%' . $search . '%');
+                return $query->where('doctors.doctor_name', 'like', '%' . $search . '%')->orWhere('doctor_schedules.day', 'like', '%' . $search . '%');
             })
             ->select('doctor_schedules.*', 'doctors.doctor_name')
             ->orderBy('doctor_id', 'asc')

@@ -19,9 +19,9 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
         $title = 'Doctors';
-        $doctors = Doctor::
-            when($request->input('search'), function ($query, $search) {
-                return $query->where('doctor_name', 'like', '%' . $search . '%');
+        $doctors = Doctor::when($request->input('search'), function ($query, $search) {
+                return $query->where('doctor_name', 'like', '%' . $search . '%')
+                    ->orWhere('doctor_specialist', 'like', '%' . $search . '%');
             })
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -57,7 +57,7 @@ class DoctorController extends Controller
                 DB::rollBack();
             }
             $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
-            $imagePath = 'doctors/'.$nameFile;
+            $imagePath = 'doctors/' . $nameFile;
             $image->storeAs('doctors', $nameFile, 'public');
         }
         $validate['photo'] = $imagePath;
@@ -101,7 +101,7 @@ class DoctorController extends Controller
                 DB::rollBack();
             }
             $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
-            $imagePath = 'doctors/'.$nameFile;
+            $imagePath = 'doctors/' . $nameFile;
             $image->storeAs('doctors', $nameFile, 'public');
             if ($imagePathOld) {
                 Storage::disk('public')->delete($imagePathOld);
