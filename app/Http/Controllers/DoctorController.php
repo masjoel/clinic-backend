@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreDoctorReq;
 use App\Http\Requests\UpdateDoctorReq;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
@@ -62,6 +63,15 @@ class DoctorController extends Controller
         }
         $validate['photo'] = $imagePath;
         Doctor::create($validate);
+        $dataUser = [
+            'name' => $request['doctor_name'],
+            'email' => $request['doctor_email'],
+            'password' => Hash::make($request['password']),
+            'email_verified_at' => now(),
+            'phone' => $request['doctor_phone'],
+            'role' => 'doctor',
+        ];
+        User::create($dataUser);
         DB::commit();
         return redirect(route('doctors.index'))->with('success', 'Data berhasil ditambahkan');
     }
@@ -90,6 +100,7 @@ class DoctorController extends Controller
         DB::beginTransaction();
         $imagePath = $doctor->photo;
         $imagePathOld = $doctor->photo;
+        $oldEmail = $doctor->doctor_email;
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $extFile = $image->getClientOriginalExtension();
@@ -110,6 +121,12 @@ class DoctorController extends Controller
         $validate = $request->validated();
         $validate['photo'] = $imagePath;
         $doctor->update($validate);
+        $dataUser = [
+            'name' => $request['doctor_name'],
+            'email' => $request['doctor_email'],
+            'phone' => $request['doctor_phone'],
+        ];
+        User::where('email', $oldEmail)->update($dataUser);
         DB::commit();
         return redirect()->route('doctors.index')->with('success', 'Edit Doctor Successfully');
     }
