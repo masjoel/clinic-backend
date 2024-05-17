@@ -10,16 +10,24 @@ class PatientScheduleController extends Controller
 {
     public function index(Request $request)
     {
-        $patientSchedules = PatientSchedule::with('patient')
+        $patientSchedules = PatientSchedule::with('patient', 'doctor.doctorSchedule')
             ->when($request->input('nik'), function ($query, $nik) {
                 return $query->whereHas('patient', function ($query) use ($nik) {
                     $query->where('nik', 'like', '%' . $nik . '%')
                         ->orWhere('name', 'like', '%' . $nik . '%')
+                        ->orWhere('schedule_time', 'like', '%' . $nik . '%')
                         ->orWhere('complaint', 'like', '%' . $nik . '%');
-                });
+                })
+                    ->orWhereHas('doctor', function ($query) use ($nik) {
+                        $query->where('doctor_name', 'like', '%' . $nik . '%');
+                    })
+                    ->orWhereHas('doctor.doctorSchedule', function ($query) use ($nik) {
+                        $query->where('day', 'like', '%' . $nik . '%');
+                    });
             })
             ->orderBy('id', 'desc')
             ->get();
+
 
         return response([
             'data' => $patientSchedules,
@@ -62,7 +70,7 @@ class PatientScheduleController extends Controller
 
         return response([
             'data' => $patientSchedule,
-            'message' => 'Patient schedule '.$request->status,
+            'message' => 'Patient schedule ' . $request->status,
             'status' => 'OK'
         ], 201);
     }
