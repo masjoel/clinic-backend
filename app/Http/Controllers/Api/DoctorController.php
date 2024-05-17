@@ -10,9 +10,18 @@ class DoctorController extends Controller
 {
     public function index(Request $request)
     {
-        $doctors = Doctor::when($request->input('name'), function ($query, $doctor_name) {
-                return $query->where('doctor_name', 'like', '%' . $doctor_name . '%');
+        $doctors = Doctor::with('doctorSchedule')
+            ->when($request->input('name'), function ($query, $search) {
+                return $query->where('doctor_name', 'like', '%' . $search . '%')
+                ->orWhere('doctor_specialist', 'like', '%' . $search . '%');
+
             })
+            ->when($request->input('day'), function ($query, $search) {
+                return $query->whereHas('doctorSchedule', function ($query) use ($search) {
+                    return $query->where('day', 'like', '%' . $search . '%');
+                });
+            })
+
             ->orderBy('id', 'desc')
             ->get();
         return response([

@@ -8,8 +8,12 @@ use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\MedicalRecordController;
 use App\Http\Controllers\Api\PaymentDetailController;
 use App\Http\Controllers\Api\DoctorScheduleController;
+use App\Http\Controllers\Api\KabupatenController;
+use App\Http\Controllers\Api\KecamatanController;
+use App\Http\Controllers\Api\KelurahanController;
 use App\Http\Controllers\Api\SatuSehatTokenController;
 use App\Http\Controllers\Api\PatientScheduleController;
+use App\Http\Controllers\Api\ProvinsiController;
 use App\Http\Controllers\Api\ServiceMedicinesController;
 
 Route::get('/user', function (Request $request) {
@@ -27,3 +31,8 @@ Route::apiResource('medical-record', MedicalRecordController::class)->middleware
 Route::get('medical-record/services/{id}', [MedicalRecordController::class, 'getServicesByScheduleId'])->middleware('auth:sanctum');
 Route::get('medical-record-completed', [MedicalRecordController::class, 'getMRCompleted'])->middleware('auth:sanctum');
 Route::apiResource('payment-detail', PaymentDetailController::class)->middleware('auth:sanctum');
+Route::apiResource('provinces', ProvinsiController::class)->middleware('auth:sanctum');
+// Route::get('provinces?codes={id}', [ProvinsiController::class, 'show'])->middleware('auth:sanctum');
+Route::get('cities', [KabupatenController::class, 'index']);
+Route::get('districts', [KecamatanController::class, 'index']);
+Route::get('sub-districts', [KelurahanController::class, 'index']);

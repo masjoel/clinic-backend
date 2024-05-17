@@ -12,9 +12,10 @@ class DoctorScheduleController extends Controller
     public function index(Request $request)
     {
         //
-        $schedules = DoctorSchedule::with('doctor')->when($request->input('name'), function ($query, $doctor_name) {
-            return $query->whereHas('doctor', function ($query) use ($doctor_name) {
-                return $query->where('doctor_name', 'like', '%' . $doctor_name . '%');
+        $schedules = DoctorSchedule::with('doctor')->when($request->input('name'), function ($query, $search) {
+            return $query->whereHas('doctor', function ($query) use ($search) {
+                return $query->where('doctor_name', 'like', '%' . $search . '%')
+                ->orWhere('day', 'like', '%' . $search . '%');
             });
         })
             ->orderBy('id', 'desc')
