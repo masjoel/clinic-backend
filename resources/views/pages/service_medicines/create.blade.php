@@ -38,10 +38,10 @@
                                 <label>Category</label>
                                 <select class="form-control selectric @error('category') is-invalid @enderror"
                                     name="category" required>
-                                    <option value="">Select category</option>
+                                    {{-- <option value="">Select category</option> --}}
                                     <option value="medicine">Obat-obatan</option>
                                     <option value="treatment">Treatment</option>
-                                    <option value="consultation">Konsultasi Doctor</option>
+                                    <option value="consultation">Konsultasi Dokter</option>
                                 </select>
                                 @error('category')
                                     <div class="invalid-feedback">{{ $message }}</div>

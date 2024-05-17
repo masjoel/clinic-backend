@@ -29,7 +29,8 @@
                                     <a href="{{ route('service-medicines.create') }}" class="btn btn-primary"><i
                                             class="fas fa-plus"></i>
                                         New {{ $title }}</a>
-                                </div>                            </div>
+                                </div>
+                            </div>
                             <div class="card-body">
 
                                 <div class="float-right">
@@ -60,7 +61,9 @@
                                             @foreach ($service_medicines as $service)
                                                 <tr>
                                                     <td>{{ $service->name }}</td>
-                                                    <td>{{ $service->category }}</td>
+                                                    <td>{{ ($service->category == 'medicine') ? 'Obat-obatan' : (($service->category == 'treatment') ? 'Treatment' : 'Konsultasi Dokter');
+                                                    }}
+                                                    </td>
                                                     <td>{{ number_format($service->price) }}</td>
                                                     <td>{{ number_format($service->quantity) }}</td>
                                                     <td>
@@ -69,11 +72,12 @@
                                                                 class="btn btn-sm btn-info btn-icon">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </a>
-                                                            <button class="ml-2 btn btn-sm btn-danger btn-icon confirm-delete"
-                                                            id="delete" data-id="{{ $service->id }}" title="Hapus"
-                                                            data-toggle="tooltip">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
+                                                            <button
+                                                                class="ml-2 btn btn-sm btn-danger btn-icon confirm-delete"
+                                                                id="delete" data-id="{{ $service->id }}" title="Hapus"
+                                                                data-toggle="tooltip">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>

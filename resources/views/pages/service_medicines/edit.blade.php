@@ -38,14 +38,14 @@
                                 <label>Category</label>
                                 <select class="form-control selectric @error('category') is-invalid @enderror"
                                     name="category">
-                                    <option value="">Select category</option>
+                                    {{-- <option value="">Select category</option> --}}
                                     <option value="medicine"
-                                        {{ $service_medicines->category == 'medicine' ? 'selected' : '' }}>Medicine</option>
+                                        {{ $service_medicines->category == 'medicine' ? 'selected' : '' }}>Obat-obatan</option>
                                     <option value="treatment"
                                         {{ $service_medicines->category == 'treatment' ? 'selected' : '' }}>Treatment
                                     </option>
                                     <option value="consultation"
-                                        {{ $service_medicines->category == 'consultation' ? 'selected' : '' }}>Consultation
+                                        {{ $service_medicines->category == 'consultation' ? 'selected' : '' }}>Konsultasi Dokter
                                     </option>
                                 </select>
                             </div>
