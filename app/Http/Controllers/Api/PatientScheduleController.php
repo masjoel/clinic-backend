@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PatientSchedule;
 use App\Http\Controllers\Controller;
@@ -39,8 +38,7 @@ class PatientScheduleController extends Controller
 
     public function store(Request $request)
     {
-        $currentDate = Carbon::now()->format('Y-m-d');
-        $maxAntrian = PatientSchedule::whereDate('schedule_time', $currentDate)->max('no_antrian');
+        $maxAntrian = PatientSchedule::whereDate('schedule_time', $request->schedule_time)->max('no_antrian');
         $newAntrian = $maxAntrian ? $maxAntrian + 1 : 1;
 
         $request->validate([
