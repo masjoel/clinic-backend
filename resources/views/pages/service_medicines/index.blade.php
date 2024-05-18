@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'All ' . $title . 's')
+@section('title', 'All ' . $title)
 
 @push('style')
     <!-- CSS Libraries -->
@@ -61,8 +61,7 @@
                                             @foreach ($service_medicines as $service)
                                                 <tr>
                                                     <td>{{ $service->name }}</td>
-                                                    <td>{{ ($service->category == 'medicine') ? 'Obat-obatan' : (($service->category == 'treatment') ? 'Treatment' : 'Konsultasi Dokter');
-                                                    }}
+                                                    <td>{{ $service->category == 'medicine' ? 'Obat-obatan' : ($service->category == 'treatment' ? 'Treatment' : 'Konsultasi Dokter') }}
                                                     </td>
                                                     <td>{{ number_format($service->price) }}</td>
                                                     <td>{{ number_format($service->quantity) }}</td>

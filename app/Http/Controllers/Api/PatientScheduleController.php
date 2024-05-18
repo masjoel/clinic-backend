@@ -38,7 +38,8 @@ class PatientScheduleController extends Controller
 
     public function store(Request $request)
     {
-        $maxAntrian = PatientSchedule::whereDate('schedule_time', $request->schedule_time)->max('no_antrian');
+        $dateSchedule = date('Y-m-d', strtotime($request->schedule_time));
+        $maxAntrian = PatientSchedule::where('doctor_id', $request->doctor_id)->whereDate('schedule_time', $dateSchedule)->max('no_antrian');
         $newAntrian = $maxAntrian ? $maxAntrian + 1 : 1;
 
         $request->validate([
@@ -46,7 +47,6 @@ class PatientScheduleController extends Controller
             'doctor_id' => 'required',
             'schedule_time' => 'required',
             'complaint' => 'required',
-            // 'status' => 'required',
         ]);
 
         $patientSchedule = PatientSchedule::create([

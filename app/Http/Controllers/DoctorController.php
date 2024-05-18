@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreDoctorReq;
 use App\Http\Requests\UpdateDoctorReq;
+use App\Models\PatientSchedule;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -137,6 +138,14 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         DB::beginTransaction();
+        $cek = PatientSchedule::where('doctor_id', $doctor->id)->count();
+        if ($cek > 0) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data tidak dapat dihapus, sudah ada jadwal pasien!'
+            ]);
+            DB::rollBack();
+        }
         if ($doctor->photo) {
             Storage::disk('public')->delete($doctor->photo);
         }
